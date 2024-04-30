@@ -1,3 +1,6 @@
+using bg_library.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace bg_library
 {
     public class Program
@@ -5,6 +8,12 @@ namespace bg_library
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            // Add services to the container.
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(connectionString));
+
 
             // Add services to the container.
 
@@ -22,6 +31,8 @@ namespace bg_library
             app.MapControllers();
 
             app.Run();
+
+            Console.WriteLine("Hello");
         }
     }
 }
