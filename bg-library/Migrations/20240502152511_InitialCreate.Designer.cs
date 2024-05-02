@@ -12,7 +12,7 @@ using bg_library.Data;
 namespace bg_library.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240426122927_InitialCreate")]
+    [Migration("20240502152511_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -27,11 +27,11 @@ namespace bg_library.Migrations
 
             modelBuilder.Entity("bg_library.Models.BoardGame", b =>
                 {
-                    b.Property<int>("GameId")
+                    b.Property<int>("BoardGameId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GameId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BoardGameId"));
 
                     b.Property<string>("Category")
                         .IsRequired()
@@ -58,9 +58,9 @@ namespace bg_library.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("GameId");
+                    b.HasKey("BoardGameId");
 
-                    b.ToTable("BoardGames");
+                    b.ToTable("BoardGame");
                 });
 
             modelBuilder.Entity("bg_library.Models.Loan", b =>
@@ -103,18 +103,19 @@ namespace bg_library.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Registration_date")
+                    b.Property<DateTime?>("Registration_date")
                         .HasColumnType("datetime2");
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users");
+                    b.ToTable("User");
                 });
 #pragma warning restore 612, 618
         }

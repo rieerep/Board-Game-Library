@@ -11,9 +11,13 @@ namespace bg_library.Models
         [Key] 
         public int Id { get; set; }
         public int MemberId { get; set; }
-        public int BookId { get; set; }
-        public DateTime LoanDate { get; set; }
-        public DateTime DueDate { get; set; }
+        public int BoardGameId { get; set; }
+
+
+        public DateTime LoanDate { get; set; } = DateTime.UtcNow;
+
+        // Look up default values for DueDate and ReturnDate
+        public DateTime DueDate { get; set; } = DateTime.Now + TimeSpan.FromDays(14);
         public DateTime ReturnDate { get; set; }
     }
     

@@ -12,10 +12,10 @@ namespace bg_library.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "BoardGames",
+                name: "BoardGame",
                 columns: table => new
                 {
-                    GameId = table.Column<int>(type: "int", nullable: false)
+                    BoardGameId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Category = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
@@ -26,7 +26,7 @@ namespace bg_library.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BoardGames", x => x.GameId);
+                    table.PrimaryKey("PK_BoardGame", x => x.BoardGameId);
                 });
 
             migrationBuilder.CreateTable(
@@ -47,18 +47,18 @@ namespace bg_library.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "User",
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Registration_date = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Registration_date = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.PrimaryKey("PK_User", x => x.UserId);
                 });
         }
 
@@ -66,13 +66,13 @@ namespace bg_library.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BoardGames");
+                name: "BoardGame");
 
             migrationBuilder.DropTable(
                 name: "Loans");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "User");
         }
     }
 }
