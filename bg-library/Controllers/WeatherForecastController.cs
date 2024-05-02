@@ -28,6 +28,7 @@ namespace bg_library.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+            
         }
     }
 }
