@@ -9,7 +9,6 @@ namespace bg_library.Data
         { 
         }
         public DbSet<User> User { get; set; }
-
         public DbSet<BoardGame> BoardGame { get; set; }
         public DbSet<Loan> Loans { get; set; }
     }

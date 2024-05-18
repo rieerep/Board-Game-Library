@@ -25,10 +25,16 @@ namespace bg_library.Controllers
             return boardGames;
         }
 
-        [HttpPost("Loan")]
-        public IActionResult Loan([FromBody] Loan loan)
+        [HttpDelete("Loan/{id}")]
+        public IActionResult DeleteLoan(int id)
         {
-            _context.Loans.Add(loan);
+            var loan = _context.Loans.Find(id);
+            if (loan == null)
+            {
+                return NotFound();
+            }
+
+            _context.Loans.Remove(loan);
             _context.SaveChanges();
             return Ok();
         }

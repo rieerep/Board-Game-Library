@@ -6,7 +6,7 @@ namespace bg_library.Models
     {
 
         [Key]
-        public Guid UserId { get; set; }
+        public int Id { get; set; }
 
         [MaxLength(20, ErrorMessage = "Name  must be 20 characters or less"), MinLength(1)]
         public string Name { get; set; }
