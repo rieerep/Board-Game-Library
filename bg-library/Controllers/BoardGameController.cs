@@ -1,13 +1,43 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using bg_library.Data;
+using bg_library.Models;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace bg_library.Controllers
 {
-    public class BoardGameController : Controller
+    [ApiController]
+    [Route("[controller]")]
+    public class BoardGameController : ControllerBase
     {
-        [HttpPost]
-        public IActionResult Index()
+        private readonly ApplicationDbContext _context;
+
+        public BoardGameController(ApplicationDbContext context)
         {
-            return View();
+            _context = context;
         }
+
+
+        [HttpGet]
+        public IEnumerable<BoardGame> Get()
+        {
+            var boardGames = _context.BoardGame.ToList();
+            return boardGames;
+        }
+
+        [HttpDelete("Loan/{id}")]
+        public IActionResult DeleteLoan(int id)
+        {
+            var loan = _context.Loans.Find(id);
+            if (loan == null)
+            {
+                return NotFound();
+            }
+
+            _context.Loans.Remove(loan);
+            _context.SaveChanges();
+            return Ok();
+        }
+
     }
 }
