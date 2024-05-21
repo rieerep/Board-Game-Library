@@ -39,5 +39,13 @@ namespace bg_library.Controllers
             return Ok();
         }
 
+        [HttpPost("AddGame")]
+        public IActionResult AddGame([FromBody] BoardGame boardGame)
+        {
+            _context.BoardGame.Add(boardGame);
+            _context.SaveChanges();
+            return Ok();
+        }
+
     }
 }
